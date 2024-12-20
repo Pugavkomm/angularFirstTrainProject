@@ -1,0 +1,101 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-primary: #095076;
+  --text-color: #ffffff;
+  --color-hover: #128ed0;
+  --border-color: #afafaf;
+  --bacground: #787878;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  background: var(--bacground);
+  color: var(--text-color);
+}
+
+button {
+  all: initial;
+  --color: #fff;
+  background: var(--color-primary);
+  color: var(--color);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 1rem;
+  border-radius: 8px;
+
+  height: 2rem;
+
+  cursor: pointer;
+
+  transition: background-color 0.1s ease-in-out;
+  /*margin: 0;*/
+}
+
+button:hover {
+  background: var(--color-hover);
+}
+
+input {
+  all: initial;
+  padding: 1rem;
+  color: var(--text-color);
+  font-size: 1rem;
+  border: thin solid var(--border-color);
+  height: 2rem;
+  border-radius: 8px;
+  cursor: auto;
+}
+
+input:focus {
+  border: thin solid var(--color-primary);
+}
+
+select {
+  all: initial;
+  /*padding: 1rem;*/
+  border: thin solid var(--border-color);
+  height: 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  padding: 1rem 3.5em 1rem 1em;
+
+  background-image: linear-gradient(45deg, transparent 50%, #ffffff 50%),
+  linear-gradient(135deg, #ffffff 50%, transparent 50%),
+  linear-gradient(to right, #ccc, #ccc);
+  background-position: calc(100% - 20px) calc(29.5px),
+  calc(100% - 15px) calc(29.5px),
+  calc(100% - 2.5em) 1.25rem;
+  background-size: 5px 5px,
+  5px 5px,
+  1px 1.5em;
+  background-repeat: no-repeat;
+  color: var(--text-color);
+}
+
+
+select:focus {
+  border: thin solid var(--color-primary)
+}
+
+a {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--color-primary)
+}
+
+
+main {
+  max-width: 768px;
+  padding: 0 1em;
+  margin-top: 5rem;
+  margin-left: auto ;
+  margin-right: auto;
+}

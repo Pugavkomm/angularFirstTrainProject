@@ -27,7 +27,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles/main.css",
+              "src/styles/typography.css"
             ],
             "scripts": []
           },
@@ -85,12 +86,16 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles/main.css",
+              "src/styles/typography.css"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
