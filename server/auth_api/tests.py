@@ -5,8 +5,15 @@ from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
+from rest_framework_simplejwt.tokens import RefreshToken
 
 UserModel = get_user_model()
+
+
+def create_user():
+    return get_user_model().objects.create_user(
+        username="username", first_name="first_name", last_name="last_name", password="pasSw0rd!"
+    )
 
 
 class TestSignUp(APITestCase):
@@ -36,9 +43,7 @@ class TestSignUp(APITestCase):
 class TestLogIn(APITestCase):
     def setUp(self):
         self.url = reverse("sign-in")
-        self.user = get_user_model().objects.create_user(
-            username="username", first_name="first_name", last_name="last_name", password="pasSw0rd!"
-        )
+        self.user = create_user()
 
     def test_login(self):
         data = {"username": "username", "password": "pasSw0rd!"}
@@ -55,3 +60,35 @@ class TestLogIn(APITestCase):
         self.assertEqual(payload_data["first_name"], self.user.first_name)
         self.assertEqual(payload_data["last_name"], self.user.last_name)
         self.assertEqual(payload_data["user_id"], self.user.pk)
+
+
+class TestRefreshToken(APITestCase):
+    def setUp(self):
+        self.user = create_user()
+        self.url = reverse("token-refresh")
+
+        tokens = RefreshToken.for_user(self.user)
+        self.refresh = str(tokens)
+        self.access = str(tokens.access_token)
+
+        # self.client.credentials(HTTP_AUT)
+
+    def test_refresh_access_tokens_data(self):
+        response = self.client.post(self.url, data={"refresh": self.refresh}, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        data = response.data
+        access = response.data["access"]
+        header, payload, signature = access.split(".")
+        # decoded_payload = base64.b64decode(f"{payload}==")
+        # payload_data = json.loads(decoded_payload)
+        #
+        # self.assertEqual(payload_data["username"], self.user.username)
+        # self.assertEqual(payload_data["first_name"], self.user.first_name)
+        # self.assertEqual(payload_data["last_name"], self.user.last_name)
+        # self.assertEqual(payload_data["user_id"], self.user.pk)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("access", data)
+        self.assertIn("refresh", data)
