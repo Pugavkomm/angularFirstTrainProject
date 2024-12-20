@@ -17,7 +17,6 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         data = {key: value for key, value in validated_data.items() if key not in {"password1", "password2"}}
         data["password"] = validated_data["password1"]
-        print(data)
         user = self.Meta.model.objects.create_user(**data)
 
         return user
@@ -32,6 +31,12 @@ class UserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
         )
+
+
+class UserDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = "__all__"
 
 
 class LogInSerializer(TokenObtainPairSerializer):

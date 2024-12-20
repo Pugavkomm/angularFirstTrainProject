@@ -92,3 +92,25 @@ class TestRefreshToken(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn("access", data)
         self.assertIn("refresh", data)
+
+
+class TestUserDataView(APITestCase):
+    def setUp(self):
+        self.user = create_user()
+
+        tokens = RefreshToken.for_user(self.user)
+        self.refresh = str(tokens)
+        self.access = str(tokens.access_token)
+        self.url = reverse('user-data')
+
+    def test_can_authenticated_user_get_own_data(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access)
+
+        response = self.client.get(self.url)
+        data = response.data
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(data['id'], self.user.id)
+        self.assertEqual(data['first_name'], self.user.first_name)
+        self.assertEqual(data['last_name'], self.user.last_name)
+        # Can other data
