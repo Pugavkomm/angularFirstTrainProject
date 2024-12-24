@@ -27,3 +27,7 @@ p {
   line-height: 1.8rem;
 }
 
+label {
+  font-size: 1rem;
+  color: white;
+}

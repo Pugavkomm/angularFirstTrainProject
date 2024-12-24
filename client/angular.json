@@ -89,7 +89,8 @@
               "src/styles/main.css",
               "src/styles/typography.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "karmaConfig": "karma.conf.js"
           }
         }
       }

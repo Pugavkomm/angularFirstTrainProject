@@ -11,6 +11,10 @@ export const routes: Routes = [
     loadComponent: () => import('./routes/auth/sing-up/sing-up.component').then(c => c.SingUpComponent)
   },
   {
+    path: 'account/profile',
+    loadComponent: () => import('./routes/account/profile/profile.component').then(c => c.ProfileComponent)
+  },
+  {
     path: '',
     component: HomeComponent,
   },

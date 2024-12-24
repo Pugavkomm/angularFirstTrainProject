@@ -1,0 +1,13 @@
+.auth-form-container {
+  margin-top: 50%;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  row-gap: 2em;
+
+}
+
+.auth-form-container-input{
+  display: grid;
+  grid-template-rows: auto auto;
+  row-gap: 0.5em;
+}

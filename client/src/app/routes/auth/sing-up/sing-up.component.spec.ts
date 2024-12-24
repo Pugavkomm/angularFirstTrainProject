@@ -6,11 +6,10 @@ describe('SingUpComponent', () => {
   let component: SingUpComponent;
   let fixture: ComponentFixture<SingUpComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [SingUpComponent]
     })
-    .compileComponents();
 
     fixture = TestBed.createComponent(SingUpComponent);
     component = fixture.componentInstance;
