@@ -80,4 +80,17 @@ describe('AuthService', () => {
     const expired = AuthService.refreshIsExpired();
     expect(expired).toBeTrue();
   });
+
+  it('should returns userData from access token', () => {
+    const user = getFakeUser();
+    const token = getFakeToken(user);
+
+    localStorage.setItem('auth.token', JSON.stringify(token));
+
+    const userFromToken = AuthService.getUser();
+
+    expect(userFromToken).toEqual(user);
+
+
+  });
 });

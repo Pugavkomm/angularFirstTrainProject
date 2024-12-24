@@ -5,7 +5,7 @@ interface TokenParsedData {
   token_type: 'access' | 'refresh'
 }
 
-export function parseToken(token: string): TokenParsedData {
-  return jwtDecode<TokenParsedData>(token )
+export function parseToken<T = TokenParsedData>(token: string): T {
+  return jwtDecode<T>(token)
 }
 
